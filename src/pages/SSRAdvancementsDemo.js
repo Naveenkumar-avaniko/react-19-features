@@ -1,6 +1,6 @@
-import React, { Suspense, useState, useEffect } from 'react';
-import { Card, Button, Typography, Alert, Space, Tag, Row, Col, Timeline, Divider } from 'antd';
-import { FiServer, FiGlobe, FiZap, FiLayers, FiDownload, FiEye, FiClock } from 'react-icons/fi';
+import React, { Suspense, useState, useEffect, useRef } from 'react';
+import { Card, Button, Typography, Alert, Space, Tag, Row, Col, Timeline, Divider, Input, Form, message } from 'antd';
+import { FiServer, FiGlobe, FiZap, FiLayers, FiDownload, FiEye, FiClock, FiDatabase, FiCode, FiBox, FiLink } from 'react-icons/fi';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -309,6 +309,328 @@ const SSRSuspenseDemo = () => {
   );
 };
 
+// Server Actions Demo
+const ServerActionsDemo = () => {
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState(null);
+
+  // Simulated server action
+  const submitToServer = async (data) => {
+    setSubmitting(true);
+    // Simulate server processing
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    return { success: true, message: `Data processed for ${data.name}`, timestamp: new Date().toISOString() };
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await submitToServer(formData);
+      setResult(response);
+      message.success('Form submitted successfully!');
+    } catch (error) {
+      message.error('Submission failed');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <Card style={{ marginBottom: '24px' }}>
+      <Title level={4}>
+        <FiDatabase style={{ marginRight: '8px' }} />
+        Server Actions
+      </Title>
+      <Paragraph>
+        Server Actions in React 19 enable seamless server-side data handling directly within React components.
+        Forms can now submit directly to server functions without separate API endpoints.
+      </Paragraph>
+
+      <Row gutter={16}>
+        <Col span={12}>
+          <Card size="small" title="Example Form with Server Action">
+            <Form layout="vertical">
+              <Form.Item label="Name">
+                <Input 
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  placeholder="Enter your name"
+                />
+              </Form.Item>
+              <Form.Item label="Email">
+                <Input 
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  placeholder="Enter your email"
+                />
+              </Form.Item>
+              <Button 
+                type="primary" 
+                onClick={handleSubmit}
+                loading={submitting}
+                disabled={!formData.name || !formData.email}
+              >
+                Submit to Server
+              </Button>
+            </Form>
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card size="small" title="Server Action Code Example">
+            <pre style={{ background: '#f5f5f5', padding: '8px', fontSize: '12px', overflow: 'auto' }}>
+{`// Server Action (runs on server)
+'use server';
+
+async function submitForm(formData) {
+  const name = formData.get('name');
+  const email = formData.get('email');
+  
+  // Database operation
+  await db.users.create({ name, email });
+  
+  return { success: true };
+}
+
+// Client Component
+function Form() {
+  return (
+    <form action={submitForm}>
+      <input name="name" />
+      <input name="email" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}`}
+            </pre>
+          </Card>
+        </Col>
+      </Row>
+
+      {result && (
+        <Alert
+          message="Server Response"
+          description={`${result.message} at ${result.timestamp}`}
+          type="success"
+          showIcon
+          style={{ marginTop: '16px' }}
+        />
+      )}
+    </Card>
+  );
+};
+
+// React DOM Static APIs Demo
+const ReactDOMStaticAPIsDemo = () => {
+  const [hydrationMode, setHydrationMode] = useState('traditional');
+  const [showComparison, setShowComparison] = useState(false);
+
+  const hydrationModes = [
+    {
+      mode: 'traditional',
+      name: 'Traditional Hydration',
+      description: 'React 18 and earlier',
+      code: `ReactDOM.hydrate(<App />, container);`
+    },
+    {
+      mode: 'hydrateRoot',
+      name: 'HydrateRoot (React 19)',
+      description: 'Improved hydration with better error recovery',
+      code: `const root = ReactDOM.hydrateRoot(container, <App />);`
+    },
+    {
+      mode: 'createRoot',
+      name: 'CreateRoot with SSR',
+      description: 'Unified API for client and server',
+      code: `const root = ReactDOM.createRoot(container, {
+  hydrate: true,
+  onRecoverableError: (error) => {
+    console.log('Recovered from:', error);
+  }
+});`
+    }
+  ];
+
+  return (
+    <Card style={{ marginBottom: '24px' }}>
+      <Title level={4}>
+        <FiCode style={{ marginRight: '8px' }} />
+        React DOM Static APIs
+      </Title>
+      <Paragraph>
+        React 19 introduces improved hydration and SSR with ReactDOM.hydrateRoot, providing better error recovery
+        and performance optimization for server-rendered applications.
+      </Paragraph>
+
+      <Space style={{ marginBottom: '16px' }}>
+        {hydrationModes.map(mode => (
+          <Button
+            key={mode.mode}
+            type={hydrationMode === mode.mode ? 'primary' : 'default'}
+            onClick={() => setHydrationMode(mode.mode)}
+          >
+            {mode.name}
+          </Button>
+        ))}
+      </Space>
+
+      <Card size="small" style={{ marginBottom: '16px' }}>
+        <Title level={5}>{hydrationModes.find(m => m.mode === hydrationMode)?.name}</Title>
+        <Paragraph>{hydrationModes.find(m => m.mode === hydrationMode)?.description}</Paragraph>
+        <pre style={{ background: '#f5f5f5', padding: '12px', borderRadius: '4px' }}>
+          {hydrationModes.find(m => m.mode === hydrationMode)?.code}
+        </pre>
+      </Card>
+
+      <Button onClick={() => setShowComparison(!showComparison)}>
+        {showComparison ? 'Hide' : 'Show'} Feature Comparison
+      </Button>
+
+      {showComparison && (
+        <Row gutter={16} style={{ marginTop: '16px' }}>
+          <Col span={12}>
+            <Card size="small" title="Before (React 18)">
+              <ul style={{ paddingLeft: '20px' }}>
+                <li>Separate hydrate() function</li>
+                <li>Limited error recovery</li>
+                <li>No progressive enhancement</li>
+                <li>Hydration mismatches cause errors</li>
+              </ul>
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card size="small" title="After (React 19)" style={{ background: '#f0f9ff' }}>
+              <ul style={{ paddingLeft: '20px' }}>
+                <li>Unified hydrateRoot() API</li>
+                <li>Improved error recovery</li>
+                <li>Progressive enhancement support</li>
+                <li>Graceful mismatch handling</li>
+              </ul>
+            </Card>
+          </Col>
+        </Row>
+      )}
+    </Card>
+  );
+};
+
+// Refs as Props Demo
+const RefsAsPropsDemo = () => {
+  const [showDemo, setShowDemo] = useState(false);
+  const [cleanupLog, setCleanupLog] = useState([]);
+  const buttonRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Simulated component with ref cleanup
+  const ComponentWithRefCleanup = ({ ref }) => {
+    useEffect(() => {
+      if (ref?.current) {
+        setCleanupLog(prev => [...prev, `Component mounted, ref attached to ${ref.current.tagName}`]);
+        
+        // Cleanup function for ref
+        return () => {
+          setCleanupLog(prev => [...prev, `Component unmounting, cleaning up ref`]);
+          // Cleanup resources
+          if (ref.current) {
+            ref.current = null;
+          }
+        };
+      }
+    }, [ref]);
+
+    return (
+      <div>
+        <Input ref={ref} placeholder="Component with ref cleanup" />
+      </div>
+    );
+  };
+
+  return (
+    <Card style={{ marginBottom: '24px' }}>
+      <Title level={4}>
+        <FiLink style={{ marginRight: '8px' }} />
+        Refs as Props & Cleanup Functions
+      </Title>
+      <Paragraph>
+        React 19 allows passing refs as props directly and introduces cleanup functions for refs,
+        enabling cleaner resource management when components unmount.
+      </Paragraph>
+
+      <Row gutter={16}>
+        <Col span={12}>
+          <Card size="small" title="Refs as Props Example">
+            <Space direction="vertical" style={{ width: '100%' }}>
+              <Button onClick={() => setShowDemo(!showDemo)}>
+                {showDemo ? 'Hide' : 'Show'} Demo
+              </Button>
+              
+              {showDemo && (
+                <ComponentWithRefCleanup ref={inputRef} />
+              )}
+
+              <Button 
+                ref={buttonRef}
+                onClick={() => {
+                  if (inputRef.current) {
+                    inputRef.current.focus();
+                    message.info('Input focused using ref!');
+                  }
+                }}
+              >
+                Focus Input Using Ref
+              </Button>
+            </Space>
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card size="small" title="Code Example">
+            <pre style={{ background: '#f5f5f5', padding: '8px', fontSize: '12px', overflow: 'auto' }}>
+{`// React 19: Refs as props
+function MyComponent({ ref }) {
+  return <input ref={ref} />;
+}
+
+// Parent component
+function Parent() {
+  const inputRef = useRef();
+  
+  return (
+    <MyComponent ref={inputRef} />
+  );
+}
+
+// Cleanup function for refs
+function ComponentWithCleanup() {
+  const ref = useRef();
+  
+  useEffect(() => {
+    // Setup
+    const element = ref.current;
+    element?.addEventListener('focus', handleFocus);
+    
+    // Cleanup function
+    return () => {
+      element?.removeEventListener('focus', handleFocus);
+      ref.current = null; // Clean up ref
+    };
+  }, []);
+  
+  return <div ref={ref}>Content</div>;
+}`}
+            </pre>
+          </Card>
+        </Col>
+      </Row>
+
+      {cleanupLog.length > 0 && (
+        <Card size="small" title="Cleanup Log" style={{ marginTop: '16px' }}>
+          <Timeline size="small" items={cleanupLog.map(log => ({ children: log }))} />
+        </Card>
+      )}
+    </Card>
+  );
+};
+
 // Performance comparison
 const PerformanceComparison = () => {
   const metrics = {
@@ -446,6 +768,15 @@ const SSRAdvancementsDemo = () => {
 
       {/* Performance Comparison */}
       <PerformanceComparison />
+
+      {/* Server Actions Demo */}
+      <ServerActionsDemo />
+
+      {/* React DOM Static APIs Demo */}
+      <ReactDOMStaticAPIsDemo />
+
+      {/* Refs as Props Demo */}
+      <RefsAsPropsDemo />
 
       {/* Migration Guide */}
       <Card style={{ marginBottom: '24px', background: '#fff7e6', border: '1px solid #ffd591' }}>

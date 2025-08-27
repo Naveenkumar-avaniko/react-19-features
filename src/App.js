@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import TransitionsDemo from './pages/TransitionsDemo';
-import UseSyncExternalStoreDemo from './pages/UseSyncExternalStoreDemo';
-import UseInsertionEffectDemo from './pages/UseInsertionEffectDemo';
-import UseIdDemo from './pages/UseIdDemo';
 import AutomaticBatchingDemo from './pages/AutomaticBatchingDemo';
-import ConcurrentFeaturesDemo from './pages/ConcurrentFeaturesDemo';
 import SSRAdvancementsDemo from './pages/SSRAdvancementsDemo';
+import UseOptimisticDemo from './pages/UseOptimisticDemo';
+import UseFormStatusDemo from './pages/UseFormStatusDemo';
+import UseActionStateDemo from './pages/UseActionStateDemo';
+import UseHookDemo from './pages/UseHookDemo';
+import TransitionsDemo from './pages/TransitionsDemo';
+import React19EnhancementsDemo from './pages/React19EnhancementsDemo';
 import './App.css';
 
 function App() {
@@ -26,13 +27,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="transitions" element={<TransitionsDemo />} />
-            <Route path="use-sync-external-store" element={<UseSyncExternalStoreDemo />} />
-            <Route path="use-insertion-effect" element={<UseInsertionEffectDemo />} />
-            <Route path="use-id" element={<UseIdDemo />} />
             <Route path="automatic-batching" element={<AutomaticBatchingDemo />} />
-            <Route path="concurrent-features" element={<ConcurrentFeaturesDemo />} />
             <Route path="ssr-advancements" element={<SSRAdvancementsDemo />} />
+            <Route path="use-optimistic" element={<UseOptimisticDemo />} />
+            <Route path="use-form-status" element={<UseFormStatusDemo />} />
+            <Route path="use-action-state" element={<UseActionStateDemo />} />
+            <Route path="use-hook" element={<UseHookDemo />} />
+            <Route path="use-deferred-value" element={<TransitionsDemo />} />
+            <Route path="react-19-enhancements" element={<React19EnhancementsDemo />} />
           </Route>
         </Routes>
       </BrowserRouter>
