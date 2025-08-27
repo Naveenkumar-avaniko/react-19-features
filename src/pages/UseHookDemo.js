@@ -333,42 +333,42 @@ function DataComponent({ id }) {
           <Col span={8}>
             <Card size="small" title="Data Fetching">
               <Text strong>Old Way:</Text>
-              <pre style={{ fontSize: '11px' }}>
-{`useMemo + useEffect + useState`}
-              </pre>
+              <code style={{ fontSize: '11px' }}>
+                useMemo + useEffect + useState
+              </code>
               <Divider />
               <Text strong>New Way:</Text>
-              <pre style={{ fontSize: '11px' }}>
-{`use(promise) + Suspense`}
-              </pre>
+              <code style={{ fontSize: '11px' }}>
+                use(promise) + Suspense
+              </code>
             </Card>
           </Col>
           
           <Col span={8}>
             <Card size="small" title="Resource Reading">
               <Text strong>Old Way:</Text>
-              <pre style={{ fontSize: '11px' }}>
-{`useContext + useMemo`}
-              </pre>
+              <code style={{ fontSize: '11px' }}>
+                useContext + useMemo
+              </code>
               <Divider />
               <Text strong>New Way:</Text>
-              <pre style={{ fontSize: '11px' }}>
-{`use(context) - conditional!`}
-              </pre>
+              <code style={{ fontSize: '11px' }}>
+                use(context) - conditional!
+              </code>
             </Card>
           </Col>
           
           <Col span={8}>
             <Card size="small" title="Async Dependencies">
               <Text strong>Old Way:</Text>
-              <pre style={{ fontSize: '11px' }}>
-{`useCallback + dependency array`}
-              </pre>
+              <code style={{ fontSize: '11px' }}>
+                useCallback + dependency array
+              </code>
               <Divider />
               <Text strong>New Way:</Text>
-              <pre style={{ fontSize: '11px' }}>
-{`Compiler optimization + use()`}
-              </pre>
+              <code style={{ fontSize: '11px' }}>
+                Compiler optimization + use()
+              </code>
             </Card>
           </Col>
         </Row>
@@ -468,7 +468,19 @@ const UseHookDemo = () => {
         <div>
           <Card style={{ marginBottom: '24px' }}>
             <Title level={4}>Complete Example: Data Fetching Pattern</Title>
-            <pre style={{ background: '#f5f5f5', padding: '16px', borderRadius: '8px', overflow: 'auto' }}>
+            <pre style={{ 
+              background: '#1a202c', 
+              color: '#f7fafc', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              fontSize: '13px', 
+              lineHeight: '1.5',
+              overflow: 'auto',
+              fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+              border: '1px solid #4a5568',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word'
+            }}>
 {`// React 19 with use() hook
 import { use, Suspense } from 'react';
 
@@ -525,7 +537,19 @@ function App() {
 
           <Card style={{ marginBottom: '24px' }}>
             <Title level={4}>Advanced Pattern: Parallel Data Loading</Title>
-            <pre style={{ background: '#f5f5f5', padding: '16px', borderRadius: '8px', overflow: 'auto' }}>
+            <pre style={{ 
+              background: '#2f855a', 
+              color: '#f0fff4', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              fontSize: '13px', 
+              lineHeight: '1.5',
+              overflow: 'auto',
+              fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+              border: '1px solid #38a169',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word'
+            }}>
 {`// Parallel loading with use() - Much better than waterfall!
 function Dashboard() {
   // All promises start loading immediately

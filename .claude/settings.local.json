@@ -4,7 +4,9 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "Bash(npm start)",
-      "Bash(PORT=3001 npm start)"
+      "Bash(PORT=3001 npm start)",
+      "Bash(npm run build:*)",
+      "Bash(npx react-scripts build:*)"
     ],
     "deny": [],
     "ask": []

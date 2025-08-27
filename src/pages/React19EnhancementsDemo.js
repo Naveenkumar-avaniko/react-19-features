@@ -59,7 +59,19 @@ const ScriptCompatibilityDemo = () => {
         </Col>
         <Col span={12}>
           <Card size="small" title="Resource Preloading Example">
-            <pre style={{ fontSize: '12px', background: '#f5f5f5', padding: '8px', borderRadius: '4px' }}>
+            <pre style={{ 
+              background: '#1a202c', 
+              color: '#f7fafc', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              fontSize: '13px', 
+              lineHeight: '1.5',
+              overflow: 'auto',
+              fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+              border: '1px solid #4a5568',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word'
+            }}>
 {`// React 19 Resource Preloading
 import { preload, prefetch } from 'react-dom';
 
@@ -74,7 +86,8 @@ prefetch('/images/hero.jpg', { as: 'image' });
 
 // Script with async loading
 <script async src="/analytics.js" />
-<link rel="stylesheet" href="/styles.css" />`}
+<link rel="stylesheet" href="/styles.css" />
+`}
             </pre>
           </Card>
         </Col>
@@ -131,7 +144,19 @@ const CustomElementsDemo = () => {
         </Col>
         <Col span={12}>
           <Card size="small" title="Code Example">
-            <pre style={{ fontSize: '12px', background: '#f5f5f5', padding: '8px', borderRadius: '4px', overflow: 'auto' }}>
+            <pre style={{ 
+              background: '#1a202c', 
+              color: '#f7fafc', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              fontSize: '13px', 
+              lineHeight: '1.5',
+              overflow: 'auto',
+              fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+              border: '1px solid #4a5568',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word'
+            }}>
 {`// React 19 with Web Components
 function App() {
   const [value, setValue] = useState('');
@@ -166,7 +191,8 @@ class MyCustomInput extends HTMLElement {
     // React can now properly pass props
     this.render();
   }
-}`}
+}
+`}
             </pre>
           </Card>
         </Col>
@@ -282,22 +308,33 @@ const ErrorReportingDemo = () => {
           <Card size="small" title="Stack Trace Example">
             {errorType ? (
               <pre style={{ 
-                fontSize: '11px', 
-                background: '#fff2f0', 
-                padding: '8px', 
-                borderRadius: '4px',
-                border: '1px solid #ffccc7',
-                overflow: 'auto'
+                background: '#e53e3e', 
+                color: '#fff5f5', 
+                padding: '20px', 
+                borderRadius: '8px', 
+                fontSize: '13px', 
+                lineHeight: '1.5',
+                overflow: 'auto',
+                fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+                border: '1px solid #c53030',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word'
               }}>
                 {errorExamples[errorType].stack}
               </pre>
             ) : (
               <pre style={{ 
-                fontSize: '11px', 
-                background: '#f5f5f5', 
-                padding: '8px', 
-                borderRadius: '4px',
-                overflow: 'auto'
+                background: '#f7fafc', 
+                color: '#1a202c', 
+                padding: '20px', 
+                borderRadius: '8px', 
+                fontSize: '13px', 
+                lineHeight: '1.5',
+                overflow: 'auto',
+                fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+                border: '2px solid #cbd5e0',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word'
               }}>
 {`// Enhanced Error Boundary in React 19
 class ErrorBoundary extends Component {
@@ -323,7 +360,8 @@ class ErrorBoundary extends Component {
       componentStack: errorInfo
     });
   }
-}`}
+}
+`}
               </pre>
             )}
           </Card>
@@ -409,7 +447,19 @@ const FormActionsDemo = () => {
         </Col>
         <Col span={12}>
           <Card size="small" title="Code Example">
-            <pre style={{ fontSize: '12px', background: '#f5f5f5', padding: '8px', borderRadius: '4px', overflow: 'auto' }}>
+            <pre style={{ 
+              background: '#1a202c', 
+              color: '#f7fafc', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              fontSize: '13px', 
+              lineHeight: '1.5',
+              overflow: 'auto',
+              fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+              border: '1px solid #4a5568',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word'
+            }}>
 {`// React 19 Form Actions
 function ContactForm() {
   async function submitForm(formData) {
@@ -445,7 +495,8 @@ async function clientAction(formData) {
     body: formData
   });
   return response.json();
-}`}
+}
+`}
             </pre>
           </Card>
         </Col>
@@ -533,7 +584,19 @@ const AsyncResourcesDemo = () => {
                   key: 'html',
                   label: 'HTML',
                   children: (
-                    <pre style={{ fontSize: '11px', background: '#f5f5f5', padding: '8px', borderRadius: '4px', overflow: 'auto' }}>
+                    <pre style={{ 
+                      background: '#f7fafc', 
+                      color: '#1a202c', 
+                      padding: '20px', 
+                      borderRadius: '8px', 
+                      fontSize: '13px', 
+                      lineHeight: '1.5',
+                      overflow: 'auto',
+                      fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+                      border: '2px solid #cbd5e0',
+                      whiteSpace: 'pre-wrap',
+                      wordWrap: 'break-word'
+                    }}>
 {`<!-- React 19 Async Resources -->
 <!DOCTYPE html>
 <html>
@@ -554,7 +617,8 @@ const AsyncResourcesDemo = () => {
   <link rel="preconnect" href="https://api.example.com">
   <link rel="dns-prefetch" href="https://cdn.example.com">
 </head>
-</html>`}
+</html>
+`}
                     </pre>
                   )
                 },
@@ -562,7 +626,19 @@ const AsyncResourcesDemo = () => {
                   key: 'react',
                   label: 'React',
                   children: (
-                    <pre style={{ fontSize: '11px', background: '#f5f5f5', padding: '8px', borderRadius: '4px', overflow: 'auto' }}>
+                    <pre style={{ 
+                      background: '#1a202c', 
+                      color: '#f7fafc', 
+                      padding: '20px', 
+                      borderRadius: '8px', 
+                      fontSize: '13px', 
+                      lineHeight: '1.5',
+                      overflow: 'auto',
+                      fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+                      border: '1px solid #4a5568',
+                      whiteSpace: 'pre-wrap',
+                      wordWrap: 'break-word'
+                    }}>
 {`// React 19 Resource Loading
 import { preload, preinit } from 'react-dom';
 
@@ -597,7 +673,8 @@ function App() {
       />
     </>
   );
-}`}
+}
+`}
                     </pre>
                   )
                 }

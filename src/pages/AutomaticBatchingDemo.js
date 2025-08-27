@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, unstable_batchedUpdates, flushSync } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { flushSync, unstable_batchedUpdates } from 'react-dom';
 import { Card, Button, Typography, Alert, Space, Tag, Row, Col, Progress, Switch } from 'antd';
 import { FiZap, FiLayers, FiClock, FiActivity, FiBarChart } from 'react-icons/fi';
 
@@ -457,8 +458,6 @@ function handlePromise() {
 }
 
 // Opt-out of batching when needed
-import { flushSync } from 'react-dom';
-
 function handleFlushSync() {
   flushSync(() => {
     setCount1(c => c + 1); // Immediate render
@@ -469,8 +468,6 @@ function handleFlushSync() {
 }
 
 // Manual batching (React 17 style)
-import { unstable_batchedUpdates } from 'react-dom';
-
 function handleManualBatch() {
   unstable_batchedUpdates(() => {
     setCount1(c => c + 1);
