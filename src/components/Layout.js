@@ -89,7 +89,7 @@ const Layout = () => {
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        width={300}
+        width={260}
         style={{
           background: 'linear-gradient(180deg, #667eea 0%, #764ba2 100%)',
           borderRight: 'none',
@@ -100,7 +100,8 @@ const Layout = () => {
           bottom: 0,
           height: '100vh',
           zIndex: 1000,
-          overflowY: 'auto'
+          overflowY: 'auto',
+          overflowX: 'hidden'
         }}
       >
         <div className="sidebar-title">
@@ -108,7 +109,7 @@ const Layout = () => {
             ⚛️ React 19 Demo
           </Title>
         </div>
-        <div style={{ height: 'calc(100vh - 80px)', overflowY: 'auto', paddingBottom: '20px' }}>
+        <div style={{ height: 'calc(100vh - 80px)', overflowY: 'auto', overflowX: 'hidden', paddingBottom: '20px' }}>
           <Menu
             mode="inline"
             selectedKeys={[location.pathname]}
@@ -122,7 +123,7 @@ const Layout = () => {
           />
         </div>
       </Sider>
-      <AntLayout style={{ marginLeft: '300px' }}>
+      <AntLayout style={{ marginLeft: '260px' }}>
         <Header style={{ 
           background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)', 
           padding: '0 32px',

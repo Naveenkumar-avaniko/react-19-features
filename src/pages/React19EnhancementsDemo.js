@@ -60,15 +60,15 @@ const ScriptCompatibilityDemo = () => {
         <Col span={12}>
           <Card size="small" title="Resource Preloading Example">
             <pre style={{ 
-              background: '#1a202c', 
-              color: '#f7fafc', 
+              background: '#f6f8fa', 
+              color: '#24292e', 
               padding: '20px', 
               borderRadius: '8px', 
               fontSize: '13px', 
               lineHeight: '1.5',
               overflow: 'auto',
               fontFamily: 'Consolas, Monaco, "Courier New", monospace',
-              border: '1px solid #4a5568',
+              border: '1px solid #d1d5da',
               whiteSpace: 'pre-wrap',
               wordWrap: 'break-word'
             }}>
@@ -144,15 +144,15 @@ const CustomElementsDemo = () => {
         <Col span={12}>
           <Card size="small" title="Code Example">
             <pre style={{ 
-              background: '#1a202c', 
-              color: '#f7fafc', 
+              background: '#f6f8fa', 
+              color: '#24292e', 
               padding: '20px', 
               borderRadius: '8px', 
               fontSize: '13px', 
               lineHeight: '1.5',
               overflow: 'auto',
               fontFamily: 'Consolas, Monaco, "Courier New", monospace',
-              border: '1px solid #4a5568',
+              border: '1px solid #d1d5da',
               whiteSpace: 'pre-wrap',
               wordWrap: 'break-word'
             }}>
@@ -447,15 +447,15 @@ const FormActionsDemo = () => {
         <Col span={12}>
           <Card size="small" title="Code Example">
             <pre style={{ 
-              background: '#1a202c', 
-              color: '#f7fafc', 
+              background: '#f6f8fa', 
+              color: '#24292e', 
               padding: '20px', 
               borderRadius: '8px', 
               fontSize: '13px', 
               lineHeight: '1.5',
               overflow: 'auto',
               fontFamily: 'Consolas, Monaco, "Courier New", monospace',
-              border: '1px solid #4a5568',
+              border: '1px solid #d1d5da',
               whiteSpace: 'pre-wrap',
               wordWrap: 'break-word'
             }}>
@@ -626,15 +626,15 @@ const AsyncResourcesDemo = () => {
                   label: 'React',
                   children: (
                     <pre style={{ 
-                      background: '#1a202c', 
-                      color: '#f7fafc', 
+                      background: '#f6f8fa', 
+                      color: '#24292e', 
                       padding: '20px', 
                       borderRadius: '8px', 
                       fontSize: '13px', 
                       lineHeight: '1.5',
                       overflow: 'auto',
                       fontFamily: 'Consolas, Monaco, "Courier New", monospace',
-                      border: '1px solid #4a5568',
+                      border: '1px solid #d1d5da',
                       whiteSpace: 'pre-wrap',
                       wordWrap: 'break-word'
                     }}>
