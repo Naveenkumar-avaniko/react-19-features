@@ -73,10 +73,10 @@ const HydrationDemo = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiZap style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiZap style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         Progressive Hydration Demo
-      </Title>
+      </div>
       <Paragraph>
         React 18's new SSR features enable selective hydration, where high-priority 
         components become interactive first, improving perceived performance.
@@ -166,10 +166,10 @@ const StreamingDemo = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiDownload style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiDownload style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         Streaming SSR Demo
-      </Title>
+      </div>
       <Paragraph>
         Streaming SSR allows sending HTML to the client in chunks as they become ready, 
         rather than waiting for the entire page to be rendered on the server.
@@ -271,10 +271,10 @@ const SSRSuspenseDemo = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiLayers style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiLayers style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         Suspense Boundaries in SSR
-      </Title>
+      </div>
       <Paragraph>
         React 18 allows Suspense boundaries in SSR, enabling parts of the page 
         to be sent to the client while other parts are still loading on the server.
@@ -337,10 +337,10 @@ const ServerActionsDemo = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiDatabase style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiDatabase style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         Server Actions
-      </Title>
+      </div>
       <Paragraph>
         Server Actions in React 19 enable seamless server-side data handling directly within React components.
         Forms can now submit directly to server functions without separate API endpoints.
@@ -453,10 +453,10 @@ const ReactDOMStaticAPIsDemo = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiCode style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiCode style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         React DOM Static APIs
-      </Title>
+      </div>
       <Paragraph>
         React 19 introduces improved hydration and SSR with ReactDOM.hydrateRoot, providing better error recovery
         and performance optimization for server-rendered applications.
@@ -525,18 +525,23 @@ const RefsAsPropsDemo = () => {
   const ComponentWithRefCleanup = ({ ref }) => {
     useEffect(() => {
       if (ref?.current) {
-        setCleanupLog(prev => [...prev, `Component mounted, ref attached to ${ref.current.tagName}`]);
-        
-        // Cleanup function for ref
-        return () => {
-          setCleanupLog(prev => [...prev, `Component unmounting, cleaning up ref`]);
-          // Cleanup resources
-          if (ref.current) {
-            ref.current = null;
+        setCleanupLog(prev => {
+          const message = `Component mounted, ref attached to ${ref.current.tagName}`;
+          // Prevent duplicate messages
+          if (prev[prev.length - 1] !== message) {
+            return [...prev, message];
           }
-        };
+          return prev;
+        });
       }
-    }, [ref]);
+      
+      // Cleanup function for ref - avoid state updates during unmount
+      return () => {
+        console.log('Component unmounting, cleaning up ref');
+        // Cleanup resources - don't modify the ref directly
+        // Note: Cannot update state during unmount to avoid infinite loop
+      };
+    }, []); // Remove ref dependency to prevent infinite loop
 
     return (
       <div>
@@ -547,10 +552,10 @@ const RefsAsPropsDemo = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiLink style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiLink style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         Refs as Props & Cleanup Functions
-      </Title>
+      </div>
       <Paragraph>
         React 19 allows passing refs as props directly and introduces cleanup functions for refs,
         enabling cleaner resource management when components unmount.
@@ -560,7 +565,12 @@ const RefsAsPropsDemo = () => {
         <Col span={12}>
           <Card size="small" title="Refs as Props Example">
             <Space direction="vertical" style={{ width: '100%' }}>
-              <Button onClick={() => setShowDemo(!showDemo)}>
+              <Button onClick={() => {
+                setShowDemo(!showDemo);
+                if (!showDemo) {
+                  setCleanupLog([]); // Reset log when showing demo
+                }
+              }}>
                 {showDemo ? 'Hide' : 'Show'} Demo
               </Button>
               
@@ -663,10 +673,10 @@ const PerformanceComparison = () => {
 
   return (
     <Card style={{ marginBottom: '24px' }}>
-      <Title level={4}>
-        <FiEye style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>
+        <FiEye style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         Performance Improvements
-      </Title>
+      </div>
       <Paragraph>
         React 18's SSR improvements provide significant performance benefits across key metrics.
       </Paragraph>
@@ -716,10 +726,10 @@ const PerformanceComparison = () => {
 const SSRAdvancementsDemo = () => {
   return (
     <div>
-      <Title level={2}>
-        <FiServer style={{ marginRight: '8px' }} />
+      <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '24px' }}>
+        <FiServer style={{ marginRight: '8px', verticalAlign: 'middle' }} />
         SSR Advancements in React 19
-      </Title>
+      </div>
       
       <Alert
         message="React 19 SSR Advancements"

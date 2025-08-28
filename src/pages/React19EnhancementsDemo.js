@@ -86,8 +86,7 @@ prefetch('/images/hero.jpg', { as: 'image' });
 
 // Script with async loading
 <script async src="/analytics.js" />
-<link rel="stylesheet" href="/styles.css" />
-`}
+<link rel="stylesheet" href="/styles.css" />`}
             </pre>
           </Card>
         </Col>

@@ -1,4 +1,4 @@
-import React, { useState, useOptimistic } from 'react';
+import React, { useState, useOptimistic, startTransition } from 'react';
 import { Card, Button, Typography, Alert, Space, List, Avatar, Tag, Input, Progress, Badge } from 'antd';
 import { FiHeart, FiMessageCircle, FiSend, FiThumbsUp, FiStar } from 'react-icons/fi';
 
@@ -75,7 +75,9 @@ const UseOptimisticDemo = () => {
     const post = posts.find(p => p.id === postId);
     const action = post.liked ? 'unlike' : 'like';
     
-    setOptimisticPost({ postId, action });
+    startTransition(() => {
+      setOptimisticPost({ postId, action });
+    });
     
     try {
       await likePost(postId);
@@ -109,7 +111,9 @@ const UseOptimisticDemo = () => {
     };
     
     setSendingMessage(true);
-    addOptimisticMessage(optimisticMessage);
+    startTransition(() => {
+      addOptimisticMessage(optimisticMessage);
+    });
     setMessageInput('');
     
     try {
@@ -125,7 +129,9 @@ const UseOptimisticDemo = () => {
 
   const handleAddToCart = async (item) => {
     const optimisticItem = { ...item, id: `optimistic-${Date.now()}`, pending: true };
-    addOptimisticItem(optimisticItem);
+    startTransition(() => {
+      addOptimisticItem(optimisticItem);
+    });
     
     try {
       await addToCart(item);
